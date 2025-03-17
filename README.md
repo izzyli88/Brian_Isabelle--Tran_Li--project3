@@ -1,4 +1,4 @@
-# Brian Tran_ Isabelle Li _ Battleship 2
+# Battleship
 CS5610
 Brian Tran
 Isabelle Li
