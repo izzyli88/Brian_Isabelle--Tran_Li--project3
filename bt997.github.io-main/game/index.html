@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Battleship Game</title>
+    <link rel="stylesheet" href="../common/style.css">
+    <link rel="stylesheet" href="game.css">
+  </head>
+  <body>
+    <h1>Battleship Sample Games</h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../rules/">Rules</a></li>
+        <li><a href="../game/">Game</a></li>
+        <li><a href="../scores/">High Scores</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h2>Example Enemy Board</h2>
+      <div class="board">
+        <div class="column"></div><div class="column"></div>
+        <div class="greenH"><span class="hit">H</span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="redM"><span class="miss">M</span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="greenH"><span class="hit">H</span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="greenH"><span class="hit">H</span></div>
+        <div class="greenH"><span class="hit">H</span></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+      </div>
+
+      <h2>Example Player Board</h2>
+      <div class="board">
+        <div class="column"></div><div class="column"></div>
+        <div class="column"><span class="redHit">H</span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"><span class="redHit">H</span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"><span class="dot"></span></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"><span class="redHit">H</span></div>
+        <div class="column"><span class="redHit">H</span></div>
+        <div class="column"><span class="dot"></span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"><span class="dot"></span></div>
+        <div class="column"><span class="dot"></span></div>
+        <div class="column"><span class="dot"></span></div>
+        <div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+        <div class="column"></div><div class="column"></div>
+      </div>
+      <div class="textbox">
+        <p>Timestamp: 00:00</p>
+        <button>Restart</button>
+      </div>
+    </main>
+  </body>
+</html>
