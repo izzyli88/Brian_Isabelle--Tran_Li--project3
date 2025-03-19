@@ -15,27 +15,6 @@
     margin-bottom: 2.5rem;
 }
 
-.button{
-    background-color: rgb(109, 161, 239);
-    color: white;
-    padding: 8px 15px;
-    margin: 10px;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 1.4rem;
-    transition: 150ms;
-}
-
-#currPage{
-    background-color: rgb(38, 100, 182);
-}
-
-.button:hover {
-    background-color: rgb(72, 134, 215);
-    color: white;
-    transform: scale(1.1);
-}
-
 div{
     text-align: center;
     color: rgb(82, 114, 208);
