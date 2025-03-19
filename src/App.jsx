@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/NavBar";  
 import Home from "./pages/Home";
 import Rules from "./pages/Rules";
 import Game from "./pages/Game";
 import HighScores from "./pages/HighScores";
+import "./styles/styles.css";
 
 function App() {
   return (
@@ -11,8 +12,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-
-        {/* Other Pages */}
         <Route path="/rules" element={<Rules />} />
         <Route path="/game" element={<Game />} />
         <Route path="/highscores" element={<HighScores />} />

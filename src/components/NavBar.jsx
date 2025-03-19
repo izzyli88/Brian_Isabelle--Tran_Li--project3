@@ -1,41 +1,38 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "./Button";
-import "../styles/navbar.css"; 
+import "../styles/navbar.css";
 
 const Navbar = () => {
-  const location = useLocation(); 
-
   return (
     <nav className="navBar">
-      <Link to="/">
-        <Button
-          label="Home"
-          className="button"
-          id={location.pathname === "/" ? "currPage" : ""}
-        />
-      </Link>
-      <Link to="/rules">
-        <Button
-          label="Rules"
-          className="button"
-          id={location.pathname === "/rules" ? "currPage" : ""}
-        />
-      </Link>
-      <Link to="/game">
-        <Button
-          label="Game"
-          className="button"
-          id={location.pathname === "/game" ? "currPage" : ""}
-        />
-      </Link>
-      <Link to="/highscores">
-        <Button
-          label="High Scores"
-          className="button"
-          id={location.pathname === "/highscores" ? "currPage" : ""}
-        />
-      </Link>
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? "currPage" : "")}
+      >
+        <Button label="Home" className="button" />
+      </NavLink>
+
+      <NavLink
+        to="/rules"
+        className={({ isActive }) => (isActive ? "currPage" : "")}
+      >
+        <Button label="Rules" className="button" />
+      </NavLink>
+
+      <NavLink
+        to="/game"
+        className={({ isActive }) => (isActive ? "currPage" : "")}
+      >
+        <Button label="Game" className="button" />
+      </NavLink>
+
+      <NavLink
+        to="/highscores"
+        className={({ isActive }) => (isActive ? "currPage" : "")}
+      >
+        <Button label="High Scores" className="button" />
+      </NavLink>
     </nav>
   );
 };
