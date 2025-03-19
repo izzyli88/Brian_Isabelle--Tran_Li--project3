@@ -1,22 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/NavBar";  
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/NavBar";
 import Home from "./pages/Home";
 import Rules from "./pages/Rules";
-import Game from "./pages/Game";
 import HighScores from "./pages/HighScores";
+import NormalMode from "./pages/game/normal";
+import EasyMode from "./pages/game/easy";
 import "./styles/styles.css";
 
 function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rules" element={<Rules />} />
-        <Route path="/game" element={<Game />} />
         <Route path="/highscores" element={<HighScores />} />
+        <Route path="/game/easy" element={<EasyMode />} />
+        <Route path="/game/normal" element={<NormalMode />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 export default App;

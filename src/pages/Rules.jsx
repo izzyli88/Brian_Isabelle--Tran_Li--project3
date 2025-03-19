@@ -4,9 +4,12 @@ import "../styles/rules.css";
 import Button from "../components/Button";
 
 function Rules() {
+  const izzyGit = "https://github.com/izzyli88/li.isab.github.io";
+  const izzyLinkedIn = "https://www.linkedin.com/in/li-isabelle88/";
   return (
     <>
-     
+      <div>
+      </div>
       {/* Rules */}
       <div className="container">
         <div className="circle">Place ships</div>
@@ -17,18 +20,10 @@ function Rules() {
 
       {/* Credits */}
       <nav className="navBar">
-        <a
-          href="https://github.com/izzyli88/li.isab.github.io"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button label="GitHub" className="button danger" />
+        <a href={izzyGit} target="_blank" rel="noopener noreferrer">
+          <Button label="GitHub" className="button" />
         </a>
-        <a
-          href="https://www.linkedin.com/in/li-isabelle88/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={izzyLinkedIn} target="_blank" rel="noopener noreferrer">
           <Button label="LinkedIn" className="button" />
         </a>
       </nav>
