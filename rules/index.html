@@ -1,51 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Battleship Rules</title>
-    <link rel="stylesheet" href="../common/style.css">
-  </head>
-  <body>
-    <h1>Battleship Rules</h1>
-    <nav class="navbar">
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../rules/">Rules</a></li>
-        <li><a href="../game/">Game</a></li>
-        <li><a href="../scores/">High Scores</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h2>Setup</h2>
-        <div class="textbox">
-          <ol>
-            <li>Place your ships either horizontally or vertically 
-              (not diagonally) on open squares. Do this in <span style="color: darkgray">secret!</span></li>
-            <li>You must put your ships on the grid. Not off the grid. 
-              Not overlapping with other ships.</li>
-            <li>After you decide your ship placement and the game begins, ships can't be moved.</li>
-            <li>No peeking at your opponents ship layout. This is considered cheating.</li>
-          </ol>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Rules Page </title>  
+        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="rules.css">
+    </head>
+
+    <body>
+        <!-- nav bar -->
+        <nav class="navBar">
+            <a class="button" href="../">Home</a>
+            <a id="currPage" class="button" href="./">Rules</a>
+            <a class="button" href="../gamePage">Game</a>
+            <a class="button" href="../highScores">High Scores</a>
+        </nav>
+
+        <div class="container">
+            <div class="circle"> 
+                Place ships
+            </div>
+            <div class="circle">
+                Take turns firing
+            </div>
+            <div class="circle">
+                Hit all parts of ship
+
+            </div>
+            <div class="circle">
+                Sink all ships
+            </div>
         </div>
-      <h2>Rules</h2>
-      <div class="textbox">
-        <ol>
-            <li>Flip a coin to decide the order in which turns are taken.</li>
-            <li>On your turn, pick a target square and call the letter 
-              and number out that it corresponds to.</li>
-            <li>On your opponents turn, listen to what target square 
-              they call out and if you have a ship placed over that square, mark it with a red X.</li>
-            <li>Continue until all the ships of one of the players is destroyed. 
-              The last player with surviving ships wins!</li>
-        </ol>
-      </div>
-      <h2>Credits</h2>
-      <div class="textbox">
-        <p>Email: tran.bri@northeastern.edu</p>
-        <p>GitHub: bt997</p>
-        <p>Linkedin: https://www.linkedin.com/in/brian-tran97/</p>
-      </div>
-    </main>
-  </body>
-</html>
+        
+        <nav class="navBar">
+            <a class="button" href="https://github.com/izzyli88/li.isab.github.io"> GitHub</a>
+            <a class="button" href="https://www.linkedin.com/in/li-isabelle88/"> LinkedIn</a>
+
+    </body>
+
+</html> 
