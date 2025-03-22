@@ -1,15 +1,15 @@
 .square {
     background-color: rgb(109, 161, 239);
-    width: 50px;
-    height: 50px;
-    border-radius: 10%;
+    width: 100%;
+    aspect-ratio: 1 / 1; 
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2px;
-    transition: 200ms;
     font-size: 1rem;
-}
+    transition: 200ms;
+    border-radius: 10%;
+    box-sizing: border-box;
+  }
 
 .filledBox{
     font-size: 1.75rem;
@@ -20,7 +20,7 @@
 
 .shipBox{
     color: black;
-    background-color: rgb(38, 100, 182);
+    font-size: 2rem;
 }
 
 .missBox {
@@ -40,8 +40,8 @@
 
 @media(max-width: 576px) {
     .square{
-        width: 30px;
-        height: 30px;
-        font-size: 0.5rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.8rem;
     }
 }

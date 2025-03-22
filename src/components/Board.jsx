@@ -1,69 +1,100 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
 import "../styles/styles.css";
-import "../styles/gamePage.css";
+import "../styles/board.css";
 
 export default function Board({ isAi }) {
   const DIMENSION = 10;
 
-  function rotateShipRandom() {
-    return Math.random() < 0.5;
-  }
+  const boardTitle = isAi ? "Opponent Board" : "Your Board";
 
+  const boardClass = isAi ? "board" : "board notClickable"; // cant click own board
+
+  const [board, setBoard] = useState([]); // set status when click square
+
+  useEffect(() => {
+    const newBoard = generateBoard();
+    setBoard(newBoard);
+  }, []);
+
+  // ships
   const ships = [
-    { size: 5, isHorizontal: rotateShipRandom() },
-    { size: 4, isHorizontal: rotateShipRandom() },
-    { size: 3, isHorizontal: rotateShipRandom() },
-    { size: 3, isHorizontal: rotateShipRandom() },
-    { size: 2, isHorizontal: rotateShipRandom() },
+    { size: 5, isHorizontal: Math.random() < 0.5 },
+    { size: 4, isHorizontal: Math.random() < 0.5 },
+    { size: 3, isHorizontal: Math.random() < 0.5 },
+    { size: 3, isHorizontal: Math.random() < 0.5 },
+    { size: 2, isHorizontal: Math.random() < 0.5 },
   ];
 
-  function createEmptyBoard() {
-    return Array.from({ length: DIMENSION }, () =>
-      Array(DIMENSION).fill("empty")
-    );
-  }
+  // place ship, returns boolean
+  function placeShip(board, r, c, length, isHorizontal) {
+    const coords = [];
 
-  function canPlace(board, r, c, length, isHorizontal) {
     for (let i = 0; i < length; i++) {
-      let checkRow = isHorizontal ? r : r + i;
-      let checkCol = isHorizontal ? c + i : c;
+      const row = isHorizontal ? r : r + i;
+      const col = isHorizontal ? c + i : c;
 
-      if (
-        checkRow >= DIMENSION ||
-        checkCol >= DIMENSION ||
-        board[checkRow][checkCol] !== "empty"
-      ) {
-        return false; // Overlap or out of bounds
+      if (row >= DIMENSION || col >= DIMENSION || board[row][col] !== "empty") {
+        return false; // invalid ship location
       }
+
+      coords.push([row, col]);
     }
+
+    coords.forEach(([row, col]) => {
+      board[row][col] = "ship";
+    });
+
     return true;
   }
 
-  function addShip(board, r, c, length, isHorizontal) {
-    for (let i = 0; i < length; i++) {
-      let placeRow = isHorizontal ? r : r + i;
-      let placeCol = isHorizontal ? c + i : c;
-      board[placeRow][placeCol] = "ship";
-    }
-  }
+  // create board w/ random ship placement
+  function generateBoard() {
+    const newBoard = Array.from({ length: DIMENSION }, () =>
+      Array(DIMENSION).fill("empty")
+    );
 
-  function placeShips(board) {
-    let newBoard = [...board.map((row) => [...row])];
-
-    for (let ship of ships) {
+    for (const ship of ships) {
       let placed = false;
-      while (!placed) {
-        let row = Math.floor(Math.random() * DIMENSION);
-        let col = Math.floor(Math.random() * DIMENSION);
 
-        if (canPlace(newBoard, row, col, ship.size, ship.isHorizontal)) {
-          addShip(newBoard, row, col, ship.size, ship.isHorizontal);
-          placed = true;
-        }
+      while (!placed) {
+        const r = Math.floor(Math.random() * DIMENSION);
+        const c = Math.floor(Math.random() * DIMENSION);
+
+        placed = placeShip(newBoard, r, c, ship.size, ship.isHorizontal);
       }
     }
 
-    return newBoard; // Return updated board
+    return newBoard;
   }
+
+  // update status on click
+  const handleClick = (r, c) => {
+    const newBoard = board.map((row) => [...row]);
+    const cell = newBoard[r][c];
+
+    if (cell === "hit" || cell === "miss") return;
+
+    newBoard[r][c] = cell === "ship" ? "hit" : "miss";
+
+    setBoard(newBoard);
+  };
+
+  return (
+    <>
+      <h1> {boardTitle}</h1>
+      <div className={boardClass}>
+        {board.map((row, rIdx) =>
+          row.map((cell, cIdx) => (
+            <Square
+              key={`${rIdx}-${cIdx}`}
+              status={cell}
+              isAi={isAi}
+              onHit={() => handleClick(rIdx, cIdx)}
+            />
+          ))
+        )}
+      </div>
+    </>
+  );
 }

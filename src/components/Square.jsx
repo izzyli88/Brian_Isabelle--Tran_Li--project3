@@ -1,16 +1,29 @@
 import "../styles/button.css";
 import "../styles/styles.css";
+import "../styles/square.css";
 
 export default function Square({ status, onHit, isAi }) {
   let currClass = "square";
   let currSymbol = "";
 
-  if (status === "hit") {
-    currClass += isAi ? " filledBox hitBox" : " filledBox missBox";
-    currSymbol = isAi ? "✔" : "X";
-  } else if (!isAi && status === "hasShip") {
-    currClass += " shipBox";
-    currSymbol = "●";
+  if (isAi) {
+    // ai board
+    if (status === "hit") {
+      currClass += " filledBox hitBox";
+      currSymbol = "✔";
+    } else if (status === "miss") {
+      currClass += " filledBox missBox";
+      currSymbol = "X";
+    }
+  } else {
+    // own board
+    if (status === "hit") {
+      currClass += " filledBox missBox";
+      currSymbol = "X";
+    } else if (status === "ship") {
+      currClass += " shipBox";
+      currSymbol = "●";
+    }
   }
 
   return (

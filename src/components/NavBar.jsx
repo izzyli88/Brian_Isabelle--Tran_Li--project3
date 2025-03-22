@@ -15,6 +15,26 @@ function Navbar() {
         )}
       </NavLink>
 
+      <NavLink to="/game/easy">
+        {({ isActive }) => (
+          <Button
+            label="Easy"
+            className="button"
+            id={isActive ? "currPage" : ""}
+          />
+        )}
+      </NavLink>
+
+      <NavLink to="/game/normal">
+        {({ isActive }) => (
+          <Button
+            label="Normal"
+            className="button"
+            id={isActive ? "currPage" : ""}
+          />
+        )}
+      </NavLink>
+
       <NavLink to="/rules">
         {({ isActive }) => (
           <Button

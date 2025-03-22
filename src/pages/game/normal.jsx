@@ -6,6 +6,7 @@ export default function NormalMode() {
   return (
     <>
       <Board isAi={true}></Board>
+      <Board isAi={false}></Board>
     </>
   );
 }
