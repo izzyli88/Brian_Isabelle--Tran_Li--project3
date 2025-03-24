@@ -31,6 +31,23 @@ div{
     border-radius: 20px;
 }
 
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timerContainer {
+    position: absolute;
+    right: 0;
+}
+
+.gameContainer {
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
 
 @media(max-width: 576px) {          /* for mobile size */
     .navBar{

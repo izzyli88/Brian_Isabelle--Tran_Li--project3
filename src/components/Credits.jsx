@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-export default function Credits() {
+function Credits() {
   const izzyLinkedIn = "https://www.linkedin.com/in/li-isabelle88/";
   const brianLinkedIn = "https://www.linkedin.com/in/brian-tran97/";
   const git = "https://github.com/izzyli88/Brian_Isabelle--Tran_Li--project2";
@@ -22,3 +22,4 @@ export default function Credits() {
     </>
   );
 }
+export default Credits

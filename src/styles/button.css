@@ -10,7 +10,6 @@
     border: none;
 }
 
-
 #currPage{
     background-color: rgb(38, 100, 182);
 }
@@ -20,6 +19,10 @@
     color: white;
     transform: scale(1.1);
     cursor: pointer;
+}
+
+.button:active {
+    background-color: black;
 }
 
 @media(max-width: 576px) {    

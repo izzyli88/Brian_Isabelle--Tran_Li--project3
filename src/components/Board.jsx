@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useTimer } from "../context/TimerContext.jsx";
 import Square from "./Square";
 import "../styles/styles.css";
 import "../styles/board.css";
 
-export default function Board({ isAi }) {
+function Board({ isAi }) {
   const DIMENSION = 10;
 
-  const boardTitle = isAi ? "Opponent Board" : "Your Board";
+  const { gameStart, startGame } = useTimer();
+
+  const boardTitle = isAi ? "Opponent's Board" : "Your Board";
 
   const boardClass = isAi ? "board" : "board notClickable"; // cant click own board
 
@@ -70,6 +73,12 @@ export default function Board({ isAi }) {
 
   // update status on click
   const handleClick = (r, c) => {
+
+    // start timer if it hasn't been already started
+    if (!gameStart) {
+      startGame();
+    }
+
     const newBoard = board.map((row) => [...row]);
     const cell = newBoard[r][c];
 
@@ -98,3 +107,4 @@ export default function Board({ isAi }) {
     </>
   );
 }
+export default Board

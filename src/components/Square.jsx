@@ -2,7 +2,7 @@ import "../styles/button.css";
 import "../styles/styles.css";
 import "../styles/square.css";
 
-export default function Square({ status, onHit, isAi }) {
+function Square({ status, onHit, isAi }) {
   let currClass = "square";
   let currSymbol = "";
 
@@ -32,3 +32,4 @@ export default function Square({ status, onHit, isAi }) {
     </div>
   );
 }
+export default Square
