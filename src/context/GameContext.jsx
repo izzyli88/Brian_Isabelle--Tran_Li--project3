@@ -4,6 +4,7 @@ const GameContext = createContext();
 
 export function GameProvider({ children, mode }) {
   const isEasy = mode === "easy";
+
   const DIMENSION = 10;
 
   const [playerTurn, setPlayerTurn] = useState(true); // player always goes first
@@ -13,6 +14,7 @@ export function GameProvider({ children, mode }) {
   const [aiTurn, setAiTurn] = useState(false);
 
   const [playerBoard, setPlayerBoard] = useState([]);
+
   const [aiBoard, setAiBoard] = useState([]);
 
   const switchTurn = () => {
@@ -124,6 +126,23 @@ export function GameProvider({ children, mode }) {
     }
   }, [playerTurn, winner]);
 
+  // for resetting game board
+  const resetGame = () => {
+    const newAiBoard = generateBoard();
+    const newPlayerBoard = generateBoard();
+  
+    // easy and normal modes
+    setPlayerTurn(true);
+    setWinner(null);
+    setAiTurn(false);
+    setAiBoard(newAiBoard);
+  
+    // normal mode only
+    if (!isEasy) {
+        setPlayerBoard(newPlayerBoard);
+    }
+  };
+
   const value = {
     mode,
     isEasy,
@@ -135,6 +154,7 @@ export function GameProvider({ children, mode }) {
     setAiBoard,
     handleAttack,
     aiMove,
+    resetGame,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

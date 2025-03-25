@@ -6,11 +6,20 @@
     margin: 20px auto;
     width: max-content;
     box-sizing: border-box;
-  }
+    z-index: 1;
+}
 
-  .notClickable{
+.notClickable{
     pointer-events: none;
-  }
+}
+
+.gameOver {
+  position: absolute;
+  color: white;
+  background-color: red;
+  display: grid;
+  z-index: 2;
+}
 
 @media(max-width: 576px) {
 

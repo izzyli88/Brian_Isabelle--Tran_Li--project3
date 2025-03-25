@@ -6,14 +6,17 @@ import "../styles/timer.css";
 import "../styles/button.css";
 
 function Timer() {
-  const { gameStart, resetGame } = useTimer();
+  const { gameStart, resetTime } = useTimer();
+
+  const { winner, resetGame } = useGame();
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const intervalIdRef = useRef(null);
-  const startTimeRef = useRef(0);
 
-  const { winner } = useGame();
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+  const intervalIdRef = useRef(null);
+
+  const startTimeRef = useRef(0);
 
   useEffect(() => {
     if (gameStart && !isPlaying) {
@@ -48,10 +51,23 @@ function Timer() {
     setIsPlaying(false);
   }
 
+  // function reset() {
+  //   setElapsedTime(0);
+  //   setIsPlaying(false);
+  //   resetGame();
+  // }
   function reset() {
+    // Explicitly clear interval
+    clearInterval(intervalIdRef.current);
+    
+    // Reset all timer-related state
     setElapsedTime(0);
     setIsPlaying(false);
+    startTimeRef.current = 0;
+    
+    // Reset game context
     resetGame();
+    resetTime();
   }
 
   function formatTime() {

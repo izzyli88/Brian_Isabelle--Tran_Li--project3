@@ -10,14 +10,14 @@ export function TimeProvider( { children }) {
         setGameStart(true);
     };
 
-    const resetGame = () => {
+    const resetTime = () => {
         setGameStart(false);
     };
 
     const value = {
         gameStart,
         startGame,
-        resetGame
+        resetTime
     };
 
     return (

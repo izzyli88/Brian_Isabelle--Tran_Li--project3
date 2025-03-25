@@ -37,13 +37,20 @@ function Board({ isAi }) {
     if (!isAi || winner) {
       return;
     }
-    if (!isEasy && !playerTurn) return;
+    if (!isEasy && !playerTurn) {
+      return;
+    }
 
     handleAttack(board, setBoard, r, c);
   };
 
   return (
     <>
+      { winner && (
+          <div className="gameOver">
+            <h1> Game Over! {winner} wins!</h1>
+          </div>
+      )}
       <h1>{boardTitle}</h1>
       <div className={boardClass}>
         {board.map((row, rIdx) =>
@@ -57,12 +64,11 @@ function Board({ isAi }) {
           ))
         )}
       </div>
-
-      {isAi && winner && (
-        <div className="game-over">
+      {/* { !isAi && winner && (
+        <div className="gameOver">
           <h1> Game Over! {winner} wins!</h1>
         </div>
-      )}
+      )} */}
     </>
   );
 }

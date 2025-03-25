@@ -32,6 +32,11 @@
     color: rgb(14, 100, 14);
 }
 
+.aiMissBox {
+    background-color: rgb(109, 161, 239);
+    color: rgb(14, 100, 14);
+}
+
 .square:hover:not(.filledBox) {
     background-color: rgb(38, 100, 182);
     cursor: pointer;

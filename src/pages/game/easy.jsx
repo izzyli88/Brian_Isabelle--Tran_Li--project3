@@ -10,9 +10,11 @@ export default function EasyMode() {
     <>
       <TimeProvider>
         <GameProvider mode="easy">
-          <div className="game-container">
-            <h1>Easy Mode</h1>
+          <h1>Easy Mode</h1>
+          <div className="gameContainerEasy">
+            <div className="timerContainer">
             <Timer />
+            </div>
             <Board isAi={true} />
           </div>
         </GameProvider>

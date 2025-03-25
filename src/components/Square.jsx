@@ -23,6 +23,9 @@ function Square({ status, onHit, isAi }) {
     } else if (status === "ship") {
       currClass += " shipBox";
       currSymbol = "●";
+    } else if (status === "miss") {
+      currClass += " filledBox aiMissBox";
+      currSymbol = "✔";
     }
   }
 

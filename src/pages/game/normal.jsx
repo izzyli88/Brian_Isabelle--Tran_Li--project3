@@ -9,14 +9,13 @@ export default function NormalMode() {
   return (
     <TimeProvider>
       <GameProvider mode="normal">
-        <div className="gameContainer">
-          <div className="timerContainer">
+        <h1>Normal Mode</h1>
+        <div className="timerContainer">
             <Timer />
-          </div>
-          <div className="boardsWrapper">
+        </div>
+        <div className="gameContainer">
             <Board isAi={true} /> {/* Opponent board */}
             <Board isAi={false} /> {/* Player board */}
-          </div>
         </div>
       </GameProvider>
     </TimeProvider>

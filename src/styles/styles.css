@@ -38,11 +38,17 @@ div{
 }
 
 .timerContainer {
-    position: absolute;
+    position: relative;
     right: 0;
 }
 
 .gameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameContainerEasy{
     display: absolute;
     align-items: center;
     justify-content: center;
@@ -66,5 +72,11 @@ div{
         margin: 20px 0;
         width: 80%;
         height: auto;
+    }
+
+    .gameContainer {
+        display: grid;
+        align-items: center;
+        justify-content: center;
     }
 }
