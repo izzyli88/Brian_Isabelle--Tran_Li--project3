@@ -64,11 +64,6 @@ function Board({ isAi }) {
           ))
         )}
       </div>
-      {/* { !isAi && winner && (
-        <div className="gameOver">
-          <h1> Game Over! {winner} wins!</h1>
-        </div>
-      )} */}
     </>
   );
 }

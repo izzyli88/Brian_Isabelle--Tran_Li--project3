@@ -51,21 +51,11 @@ function Timer() {
     setIsPlaying(false);
   }
 
-  // function reset() {
-  //   setElapsedTime(0);
-  //   setIsPlaying(false);
-  //   resetGame();
-  // }
   function reset() {
-    // Explicitly clear interval
     clearInterval(intervalIdRef.current);
-    
-    // Reset all timer-related state
     setElapsedTime(0);
     setIsPlaying(false);
     startTimeRef.current = 0;
-    
-    // Reset game context
     resetGame();
     resetTime();
   }
