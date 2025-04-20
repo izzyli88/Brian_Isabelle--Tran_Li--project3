@@ -4,7 +4,7 @@ import Button from "./Button";
 function Credits() {
   const izzyLinkedIn = "https://www.linkedin.com/in/li-isabelle88/";
   const brianLinkedIn = "https://www.linkedin.com/in/brian-tran97/";
-  const git = "https://github.com/izzyli88/Brian_Isabelle--Tran_Li--project2";
+  const git = "https://github.com/izzyli88/Brian_Isabelle--Tran_Li--project3";
 
   return (
     <>

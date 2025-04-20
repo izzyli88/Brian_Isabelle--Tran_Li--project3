@@ -5,10 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Rules from "./pages/Rules";
 import HighScores from "./pages/HighScores";
-import NormalMode from "./pages/normal";
+import Game from "./pages/Game";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/NavBar";
+import { UserProvider } from "./context/UserContext";
 
 import "./styles/styles.css";
 
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <NormalMode />
+        <Game />
       </>
     ),
   },
@@ -71,6 +72,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );

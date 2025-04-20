@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/register', async function(req, res) {
     const requestBody = req.body;
-    const password = requestBody.pass;
+    const password = requestBody.password;
     const username = requestBody.username;
 
     if(!password || !username) {
@@ -15,7 +15,7 @@ router.post('/register', async function(req, res) {
 
     const userdata = {
         username: username,
-        pass: password
+        password: password
     }
 
     try {
@@ -31,15 +31,22 @@ router.post('/register', async function(req, res) {
 router.post('/login', async function(req, res) {
 
     const requestBody = req.body;
-    const password = requestBody.pass;
+    const password = requestBody.password;
     const username = requestBody.username;
+    const verifyPassword = requestBody.verifyPassword
 
-    if(!password || !username) {
+
+    if(!password || !username || !verifyPassword) {
         res.status(401);
-        res.send("User did not provide a username and/or password")
+        res.send("Incomplete information given")
         return;
     }
 
+    if (password != verifyPassword) {
+        res.status(401);
+        res.send("Passwords should match.")
+        return;
+    }
 
     try {
         const response = await findUser(username);
@@ -50,7 +57,7 @@ router.post('/login', async function(req, res) {
             return;
         }
 
-        if(password !== response.pass) {
+        if(password !== response.password) {
             res.status(401);
             res.send("Username/password pair not valid")
             return;
