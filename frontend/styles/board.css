@@ -13,14 +13,6 @@
     pointer-events: none;
 }
 
-.gameOver {
-  position: absolute;
-  color: white;
-  background-color: red;
-  display: grid;
-  z-index: 2;
-}
-
 @media(max-width: 576px) {
 
   .board {

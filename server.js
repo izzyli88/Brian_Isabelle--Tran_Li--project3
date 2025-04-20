@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 import userRouter from "./backend/api/user.api.js";
+import gameRouter from "./backend/api/game.api.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import path from "path"
@@ -12,6 +13,7 @@ app.use(cookieParser());
 
 // router usage
 app.use("/api/user", userRouter);
+app.use("/api/game", gameRouter);
 
 
 // connecting to mongodb

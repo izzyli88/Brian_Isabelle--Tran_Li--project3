@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/game",
+    path: "/game/:gameID",
     element: (
       <>
         <Navbar />

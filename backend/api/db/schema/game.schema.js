@@ -1,43 +1,33 @@
-const mongoose = require('mongoose');
+import { Schema } from "mongoose";
 
 export const GameSchema = new Schema({
-  player1: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  p1: {
+    type: String,   // username
     required: true
   },
-  player2: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  p2: {
+    type: String    // username
+    // not required bc originally open
   },
-  player1Board: {
+  p1Board: {
     type: Array,
     required: true
   },
-  player2Board: {
+  p2Board: {
     type: Array,
+    required: true
   },
-  moves: [{
-    player: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    x: Number,
-    y: Number,
-    hit: Boolean
-  }],
-  currentTurn: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  turn: {
+    type: String, // username of p1  or p2
+    required: true
   },
   status: {
     type: String,
-    enum: ['open', 'active', 'completed'],
-    default: 'open'
+    enum: ["Open", "Active", "Completed"],
+    default: "Open",
   },
   winner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    type: String,
+    default: "",
   }
 }, { timestamps: true });
-

@@ -2,12 +2,12 @@ import "../styles/button.css";
 import "../styles/styles.css";
 import "../styles/square.css";
 
-function Square({ status, onHit, isAi }) {
+function Square({ status, onHit, isOpponent }) {
   let currClass = "square";
   let currSymbol = "";
 
-  if (isAi) {
-    // ai board
+  if (isOpponent) {
+    // opponent
     if (status === "hit") {
       currClass += " filledBox hitBox";
       currSymbol = "✔";
@@ -24,7 +24,7 @@ function Square({ status, onHit, isAi }) {
       currClass += " shipBox";
       currSymbol = "●";
     } else if (status === "miss") {
-      currClass += " filledBox aiMissBox";
+      currClass += " filledBox opponentMissBox";
       currSymbol = "✔";
     }
   }

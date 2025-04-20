@@ -1,23 +1,35 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
 
 function Navbar() {
-  const { user, setUser} = useUser()
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+
+  async function joinGame() {
+    try {
+      const res = await axios.post("api/game");
+      const game = res.data;
+      const gameId = game._id;
+      navigate(`/game/${gameId}`);
+    } catch (e) {
+      console.error("Couldn't start game.");
+    }
+  }
 
   async function logout() {
     try {
-      await axios.delete("/api/user/logout"); 
-      setUser(undefined);                          
+      await axios.delete("/api/user/logout");
+      setUser(undefined);
     } catch (error) {
       console.error("Logout failed", error);
     }
   }
 
   function loggedStatusButtons() {
-    if (user === undefined) {  
+    if (user === undefined) {
       return (
         <>
           <NavLink to="/login">
@@ -39,12 +51,13 @@ function Navbar() {
         </>
       );
     } else {
-      return(
+      return (
         <>
-        <Button label="Log Out" className="button" onClick={logout}/>
+          <Button label="Log Out" className="button" onClick={logout} />
 
-        <h1> Hi, {user}</h1>
-        </>);
+          <h1> Hi, {user}</h1>
+        </>
+      );
     }
   }
 
@@ -59,14 +72,7 @@ function Navbar() {
         )}
       </NavLink>
 
-      <NavLink to="/game">
-        {({ isActive }) => (
-          <Button
-            label="Game"
-            className={`button ${isActive ? "currPage" : ""}`}
-          />
-        )}
-      </NavLink>
+      <Button label="Game" className="button" onClick={joinGame} />
 
       <NavLink to="/rules">
         {({ isActive }) => (
