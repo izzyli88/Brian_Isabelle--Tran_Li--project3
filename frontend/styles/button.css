@@ -10,7 +10,7 @@
     border: none;
 }
 
-#currPage{
+.currPage{
     background-color: rgb(38, 100, 182);
 }
 

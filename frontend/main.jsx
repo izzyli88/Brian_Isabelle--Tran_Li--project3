@@ -1,28 +1,76 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import MyPokemon from "./pokemon/MyPokemon";
 import React from "react";
-import { createBrowserRouter, RouterProvider} from "react-router-dom";
-import Login from "./pokemon/login";
-import AllPokemon from "./Pokemon/AllPokemon";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Rules from "./pages/Rules";
+import HighScores from "./pages/HighScores";
+import NormalMode from "./pages/normal";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Navbar from "./components/NavBar";
+
+import "./styles/styles.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MyPokemon />,
+    element: (
+      <>
+        <Navbar />
+        <Home />
+      </>
+    ),
+  },
+  {
+    path: "/rules",
+    element: (
+      <>
+        <Navbar />
+        <Rules />
+      </>
+    ),
+  },
+  {
+    path: "/highscores",
+    element: (
+      <>
+        <Navbar />
+        <HighScores />
+      </>
+    ),
+  },
+  {
+    path: "/game",
+    element: (
+      <>
+        <Navbar />
+        <NormalMode />
+      </>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <>
+        <Navbar />
+        <Login />
+      </>
+    ),
   },
   {
-    path: "/all",
-    element: <AllPokemon />,
+    path: "/register",
+    element: (
+      <>
+        <Navbar />
+        <Register />
+      </>
+    ),
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </React.StrictMode>
 );

@@ -3,11 +3,19 @@ import { Schema } from "mongoose";
 export const UserSchema = new Schema({
     username: {
         type: String,
-        unique: true
+        unique: true,
+        required: true
     },
-    pass: String,
-    age: {
+    password: {
+        type: String,
+        required: true
+    },
+    wins: {
         type: Number,
-        default: () =>Math.ceil(Math.random()* 100)
+        default: 0
+    },
+    losses: {
+        type: Number,
+        default: 0
     }
 }, { collection: "users"})

@@ -1,6 +1,5 @@
 import express from "express";
 const app = express();
-import pokemonRouter from "./backend/api/pokemon.api.js";
 import userRouter from "./backend/api/user.api.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -10,8 +9,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(cookieParser());
-// router usag e
-app.use("/api/pokemon", pokemonRouter)
+
+// router usage
 app.use("/api/user", userRouter);
 
 

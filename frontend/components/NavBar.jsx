@@ -5,32 +5,20 @@ import Button from "./Button";
 function Navbar() {
   return (
     <nav className="navBar">
-      <NavLink to="/">
+      <NavLink to="/" end>
         {({ isActive }) => (
           <Button
             label="Home"
-            className="button"
-            id={isActive ? "currPage" : ""}
+            className={`button ${isActive ? "currPage" : ""}`}
           />
         )}
       </NavLink>
 
-      <NavLink to="/game/easy">
+      <NavLink to="/game">
         {({ isActive }) => (
           <Button
-            label="Easy"
-            className="button"
-            id={isActive ? "currPage" : ""}
-          />
-        )}
-      </NavLink>
-
-      <NavLink to="/game/normal">
-        {({ isActive }) => (
-          <Button
-            label="Normal"
-            className="button"
-            id={isActive ? "currPage" : ""}
+            label="Game"
+            className={`button ${isActive ? "currPage" : ""}`}
           />
         )}
       </NavLink>
@@ -39,8 +27,7 @@ function Navbar() {
         {({ isActive }) => (
           <Button
             label="Rules"
-            className="button"
-            id={isActive ? "currPage" : ""}
+            className={`button ${isActive ? "currPage" : ""}`}
           />
         )}
       </NavLink>
@@ -49,8 +36,7 @@ function Navbar() {
         {({ isActive }) => (
           <Button
             label="High Scores"
-            className="button"
-            id={isActive ? "currPage" : ""}
+            className={`button ${isActive ? "currPage" : ""}`}
           />
         )}
       </NavLink>
