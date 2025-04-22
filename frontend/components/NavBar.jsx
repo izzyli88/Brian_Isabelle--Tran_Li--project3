@@ -10,7 +10,7 @@ function Navbar() {
 
   async function joinGame() {
     try {
-      const res = await axios.post("api/game");
+      const res = await axios.post("/api/game");
       const game = res.data;
       const gameId = game._id;
       navigate(`/game/${gameId}`);
@@ -72,7 +72,18 @@ function Navbar() {
         )}
       </NavLink>
 
-      <Button label="Game" className="button" onClick={joinGame} />
+        
+          <NavLink to="/game">
+          {({ isActive }) => (
+            <Button
+            label="New Game"
+            className="button" onClick={joinGame}
+            />
+          )}
+          </NavLink>
+
+        {/* <Button label="New Game" className="button" onClick={joinGame} /> */}
+        
 
       <NavLink to="/rules">
         {({ isActive }) => (
@@ -87,6 +98,15 @@ function Navbar() {
         {({ isActive }) => (
           <Button
             label="High Scores"
+            className={`button ${isActive ? "currPage" : ""}`}
+          />
+        )}
+      </NavLink>
+
+      <NavLink to="/allgames">
+        {({ isActive }) => (
+          <Button
+            label="All Games"
             className={`button ${isActive ? "currPage" : ""}`}
           />
         )}

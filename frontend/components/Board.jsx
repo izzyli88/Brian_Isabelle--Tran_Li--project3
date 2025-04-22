@@ -1,5 +1,6 @@
 import React from "react";
 import Square from "./Square";
+import axios from "axios";
 import "../styles/styles.css";
 import "../styles/board.css";
 

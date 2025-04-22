@@ -5,7 +5,7 @@ import "../styles/styles.css";
 import Board from "../components/Board";
 
 function GameLayout() {
-  const gameId = useParams();
+  const { gameId } = useParams();
 
   const [playerBoard, setPlayerBoard] = useState([]);
   const [opponentBoard, setOpponentBoard] = useState([]);

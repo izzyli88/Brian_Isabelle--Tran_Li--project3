@@ -8,6 +8,7 @@ import HighScores from "./pages/HighScores";
 import Game from "./pages/Game";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AllGames from "./pages/AllGames";
 import Navbar from "./components/NavBar";
 import { UserProvider } from "./context/UserContext";
 
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/game/:gameID",
+    path: "/game",
+    // path: "/game/:gameId",
     element: (
       <>
         <Navbar />
@@ -65,6 +67,15 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Register />
+      </>
+    ),
+  },
+  {
+    path: "/allgames",
+    element: (
+      <>
+        <Navbar />
+        <AllGames />
       </>
     ),
   },
