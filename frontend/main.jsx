@@ -71,7 +71,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/allgames",
+    path: "/games",
     element: (
       <>
         <Navbar />

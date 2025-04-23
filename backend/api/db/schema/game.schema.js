@@ -6,8 +6,9 @@ export const GameSchema = new Schema({
     required: true
   },
   p2: {
-    type: String    // username
-    // not required bc originally open
+    type: String,    // username
+    default: ""
+
   },
   p1Board: {
     type: Array,
@@ -23,11 +24,19 @@ export const GameSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["Open", "Active", "Completed"],
-    default: "Open",
+    default: "Open"
   },
   winner: {
     type: String,
     default: "",
+  },
+
+  start: {
+    type: Date,
+    default: () => new Date()
+  },
+  end: {
+    type: Date,
+    default: () => new Date()
   }
 }, { timestamps: true });

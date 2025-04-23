@@ -3,19 +3,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
+axios.defaults.withCredentials = true;
 
 function Navbar() {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
 
-  async function joinGame() {
+  async function createGame() {
     try {
       const res = await axios.post("/api/game");
       const game = res.data;
       const gameId = game._id;
       navigate(`/game/${gameId}`);
     } catch (e) {
-      console.error("Couldn't start game.");
+      console.error("Couldn't start game. " + e);
     }
   }
 
@@ -71,19 +72,14 @@ function Navbar() {
           />
         )}
       </NavLink>
-
-        
           <NavLink to="/game">
           {({ isActive }) => (
             <Button
             label="New Game"
-            className="button" onClick={joinGame}
+            className="button" onClick={createGame}
             />
           )}
-          </NavLink>
-
-        {/* <Button label="New Game" className="button" onClick={joinGame} /> */}
-        
+          </NavLink>        
 
       <NavLink to="/rules">
         {({ isActive }) => (
@@ -103,7 +99,7 @@ function Navbar() {
         )}
       </NavLink>
 
-      <NavLink to="/allgames">
+      <NavLink to="/games">
         {({ isActive }) => (
           <Button
             label="All Games"

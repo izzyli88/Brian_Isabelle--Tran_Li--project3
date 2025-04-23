@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, findUser } from './db/model/user.model.js';
+import { createUser, findUser, getAllUsers, getAllSortedUsers, deleteAllUsers } from './db/model/user.model.js';
 const router = express.Router();
 
 router.post('/register', async function(req, res) {
@@ -88,5 +88,22 @@ router.delete('/logout', async function(req, res) {
     res.send("Successfully logged out")
 })
 
+// functional retrieve all
+router.get("/all", async function(req, res) {
+    const allUsers = await getAllUsers();
+    res.json(allUsers);
+})
+
+// functional leaderboard retrieval
+router.get("/highScores", async function(req, res) {
+    const allSortedUsers = await getAllSortedUsers();
+    res.json(allSortedUsers);
+})
+
+// functional delete all games 4 testing
+router.delete("/deleteAll", async function (req, res) {
+    const deleteAll = await deleteAllUsers();
+    res.json(deleteAll);
+})
 
 export default router;

@@ -4,7 +4,7 @@ import generateBoard from "../../../utils/generateBoard.js"
 const GameModel = mongoose.model("Game", GameSchema);
 
 
-// create new game
+// functional
 export function createGame(username) {
   const newGameInfo = {
     p1: username,
@@ -14,6 +14,16 @@ export function createGame(username) {
   };
 
   return GameModel.create(newGameInfo);
+}
+
+// join gameId game as p2  & start game
+export async function joinGame(username, gameId) {
+  const openGame = await GameModel.findOne({_id: gameId});
+
+  openGame.p2 = username;
+  openGame.status = "Active";
+  await openGame.save();
+  return openGame;
 }
 
 // make move
@@ -56,25 +66,62 @@ export async function makeMove(moveSet) {
   return game;
 }
 
-// find open game if available, else create game
-export async function joinGame(username) {
-  const openGame = await GameModel.findOne({ status: "Open" });
 
-  if (openGame) {
-    if (openGame.p1 === username) {
-      throw new Error("You cannot join your own game");
-    }
+export async function getAllGames() {
+  return GameModel.find().exec();
+}
 
-    openGame.p2 = username;
-    openGame.status = "Active";
-    await openGame.save();
-    return openGame;
-  } 
+export async function deleteAllGames(){
+  return GameModel.deleteMany().exec();
+}
 
-  // create game if no open found
-  return createGame(username);
+
+// games: logged in
+
+// functional
+export async function getOtherOpenGames(username) {
+  return GameModel.find({status: "Open",p1: { $ne: username }});
+}
+
+// functional
+export async function getMyOpenGames(username) {
+  return GameModel.find({
+    status: "Open",
+    p1: username,
+    p2: ""
+  });
+}
+
+export async function getMyActiveGames(username) {
+  return GameModel.find({ status: "Active",$or: [{ p1: username },{ p2: username }]});
+}
+
+export async function getMyCompletedGames(username) {
+  return GameModel.find({ status: "Completed",$or: [{ p1: username },{ p2: username }]});
+}
+
+// functional
+export async function getOtherGames(username) {
+  return GameModel.find({
+    $and: [
+      { $or: [{ status: "Active" }, { status: "Completed" }] },
+      { p1: { $ne: username } },
+      { p2: { $ne: username } }
+    ]
+  });
+}
+
+// games: not logged in
+
+export async function getAllActiveGames(){
+  return GameModel.find({status: "Active"}).exec();
+}
+
+export async function getAllCompletedGames(){
+  return GameModel.find({status: "Completed"}).exec();
 }
 
 function checkWinner(board) {
   return board.every((row) => row.every((cell) => cell !== "ship"));
 }
+

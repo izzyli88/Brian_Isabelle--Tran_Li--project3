@@ -9,7 +9,6 @@ export default function Rules() {
       <div></div>
       {/* rules */}
       <div className="container">
-        <div className="circle">Place ships</div>
         <div className="circle">Take turns firing</div>
         <div className="circle">Hit all parts of ship</div>
         <div className="circle">Sink all ships</div>
