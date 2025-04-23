@@ -16,7 +16,7 @@ export function createGame(username) {
   return GameModel.create(newGameInfo);
 }
 
-// join gameId game as p2  & start game
+// functional
 export async function joinGame(username, gameId) {
   const openGame = await GameModel.findOne({_id: gameId});
 
@@ -24,6 +24,11 @@ export async function joinGame(username, gameId) {
   openGame.status = "Active";
   await openGame.save();
   return openGame;
+}
+
+
+export async function getByGameId(gameId) {
+  return GameModel.findById(gameId).exec();
 }
 
 // make move

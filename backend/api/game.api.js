@@ -1,7 +1,7 @@
 import express from "express"
 const router = express.Router();
 import { joinGame, getAllGames, deleteAllGames, getAllActiveGames, getAllCompletedGames, getOtherOpenGames,
-getMyActiveGames, getMyOpenGames, getMyCompletedGames, getOtherGames, createGame } from "./db/model/game.model.js";
+getMyActiveGames, getMyOpenGames, getMyCompletedGames, getOtherGames, createGame, getByGameId } from "./db/model/game.model.js";
 
 
 // create: functional
@@ -37,6 +37,8 @@ router.post("/joinGame", async function (req, res) {
     }  
 });
 
+
+
 // make move
 router.post("/move", async function (req, res) {
     const username = req.cookies.user
@@ -44,7 +46,7 @@ router.post("/move", async function (req, res) {
     const c = req.body.c    // col
     const gameId = req.body.gameId
 
-    if (!username || !r || !c || !gameId) {
+    if (!username || r === undefined || c === undefined || !gameId) {
         res.status(400).send("Incomplete information given (username/row/column");
         return;
     }
@@ -108,6 +110,21 @@ router.get("/allCompleted", async function (req, res) {
 router.get("/all", async function (req, res) {
     const allGames = await getAllGames();
     res.json(allGames);
+})
+
+
+// getBygameId
+router.get("/:gameId", async function(req, res) {
+    const {gameId} = req.params;
+
+    try {
+        const game = await getByGameId(gameId);
+        res.send(game)
+
+    } catch (e) {
+        res.status(400).send(e.message)
+    }
+
 })
 
 // functional delete all games 4 testing

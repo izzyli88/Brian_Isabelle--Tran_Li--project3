@@ -36,7 +36,8 @@ export default function AllGames() {
     },
     [user]
   );
-
+  
+  // functional
   async function joinGame(gameId) {
     try {
       const res = await axios.post("/api/game/joinGame", { gameId });
