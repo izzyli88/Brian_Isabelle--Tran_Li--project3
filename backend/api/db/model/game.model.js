@@ -37,10 +37,6 @@ export async function makeMove(moveSet) {
 
   const game = await GameModel.findById(gameId);
 
-  if (!game) {
-    throw new Error("Game not found");
-  }
-
   if (game.turn !== username) {
     throw new Error("Not your turn");
   }
@@ -49,10 +45,6 @@ export async function makeMove(moveSet) {
   const opponentBoard = isP1 ? game.p2Board : game.p1Board;
 
   const targetCell = opponentBoard[r][c];
-
-  if (targetCell === "hit" || targetCell === "miss") {
-    throw new Error("Cell already attacked");
-  }
 
   if (targetCell === "ship") {
     opponentBoard[r][c] = "hit"; 
@@ -66,6 +58,9 @@ export async function makeMove(moveSet) {
   } else {
     game.turn = isP1 ? game.p2 : game.p1;
   }
+
+  game.markModified("p1Board");
+  game.markModified("p2Board");
 
   await game.save();
   return game;

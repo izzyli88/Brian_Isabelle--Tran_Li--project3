@@ -1,7 +1,7 @@
 import express from "express"
 const router = express.Router();
 import { joinGame, getAllGames, deleteAllGames, getAllActiveGames, getAllCompletedGames, getOtherOpenGames,
-getMyActiveGames, getMyOpenGames, getMyCompletedGames, getOtherGames, createGame, getByGameId } from "./db/model/game.model.js";
+getMyActiveGames, getMyOpenGames, getMyCompletedGames, getOtherGames, createGame, getByGameId, makeMove } from "./db/model/game.model.js";
 
 
 // create: functional

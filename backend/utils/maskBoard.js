@@ -18,7 +18,8 @@ function maskBoard(board) {
       opponentBoard: isP1 ? maskBoard(game.p2Board) : maskBoard(game.p1Board), // masked opponent board
       turn: game.turn,
       status: game.status,
-      winner: game.winner
+      winner: game.winner,
+      opponent: isP1 ? game.p2 : game.p1
     };
   }
   

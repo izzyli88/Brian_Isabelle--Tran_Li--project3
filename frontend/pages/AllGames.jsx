@@ -172,7 +172,9 @@ export default function AllGames() {
     for (let game of myCompletedGames) {
       const id = game._id;
       const opponent = user === game.p1 ? game.p2 : game.p1;
-      const message = game.winner === user ? "You won" : "You lost";
+      const message = game.winner === user ? "Won" : "Lost";
+      const start = game.start
+      const end = game.end
 
       games.push(
         <div key={id}>

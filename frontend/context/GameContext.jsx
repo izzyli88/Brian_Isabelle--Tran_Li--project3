@@ -2,27 +2,30 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "./UserContext.jsx";
 import { useParams } from "react-router-dom";
+import getMaskedGame from "../../backend/utils/maskBoard.js"
+import "../styles/styles.css"
+
 const GameContext = createContext();
 
 export function GameProvider({ children }) {
   const { user } = useUser();
   const { gameId } = useParams();
 
-  const [turn, setTurn] = useState(true); // player always goes first
+  const [yourBoard, setYourBoard] = useState([]);
+  const [opponentBoard, setOpponentBoard] = useState([]);
+  const [turn, setTurn] = useState("");
   const [winner, setWinner] = useState(null);
-  const [p1Board, setP1Board] = useState([]);
-  const [p2Board, setP2Board] = useState([]);
-
-  const [p1, setP1] = useState("");
-  const [p2, setP2] = useState("");
+  const [yourName, setYourName] = useState("");
+  const [opponentName, setOpponentName] = useState("");
 
   async function retrieveGameData() {
     try {
-      const response = await axios.get("/api/game/" + gameId);
-      return response.data;
+      const res = await axios.get("/api/game/" + gameId);
+      const game = getMaskedGame(res.data, user);
+      return game;
     } catch (e) {
-      console.error("Error when fetching gamne");
-      return;
+      console.error("Error fetching game:", e.message);
+      return null;
     }
   }
 
@@ -30,41 +33,46 @@ export function GameProvider({ children }) {
     async function fetchData() {
       const game = await retrieveGameData();
       if (!game) return;
-      setP1(game.p1);
-      setP2(game.p2);
-      setP1Board(game.p1Board);
-      setP2Board(game.p2Board);
+
+      setYourBoard(game.yourBoard);
+      setOpponentBoard(game.opponentBoard);
+      setTurn(game.turn);
       setWinner(game.winner);
+
+      setYourName(user);
+      setOpponentName(game.opponent); 
     }
 
     fetchData();
   }, [turn]);
 
   async function handleAttack(r, c) {
-    const req = {
-      r: r,
-      c: c,
-      gameId: gameId,
-    };
+    const req = { r, c, gameId };
 
     try {
-        await axios.post("/api/game/move", req);
-        setTurn(!turn)      // just triggers use-effect
+      await axios.post("/api/game/move", req);
+      const updatedGame = await retrieveGameData();
+
+      if (updatedGame) {
+        setYourBoard(updatedGame.yourBoard);
+        setOpponentBoard(updatedGame.opponentBoard);
+        setTurn(updatedGame.turn);
+        setWinner(updatedGame.winner);
+      }
     } catch (e) {
-        console.log(e.message);
+      console.error("Attack failed:", e.message);
     }
   }
 
   const value = {
-    turn,
-    p1Board,
-    p2Board,
-    winner,
-    setPlayerBoard: setP1Board,
-    setOpponentBoard: setP2Board,
+    yourBoard,
+    opponentBoard,
     handleAttack,
-    p1,
-    p2,
+    turn,
+    isYourTurn: turn === user,
+    winner,
+    yourName,
+    opponentName,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
