@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, findUser, getAllUsers, getAllSortedUsers, deleteAllUsers } from './db/model/user.model.js';
+import { createUser, findUser, getAllUsers, getAllSortedUsers, deleteAllUsers, updateWins, updateLosses } from './db/model/user.model.js';
 const router = express.Router();
 
 router.post('/register', async function(req, res) {
@@ -102,8 +102,18 @@ router.get("/highScores", async function(req, res) {
 
 // functional delete all games 4 testing
 router.delete("/deleteAll", async function (req, res) {
-    const deleteAll = await deleteAllUsers();
+    const deleteAll = deleteAllUsers();
     res.json(deleteAll);
 })
+
+router.post("/updateWins/:username", async function(req, res) {
+    const ans = await updateWins(req.params.username);
+    res.json(ans)
+})
+
+router.post("/updateLosses/:username", async function(req, res){
+    const ans = await updateLosses(req.params.username);
+    res.json(ans)
+});
 
 export default router;

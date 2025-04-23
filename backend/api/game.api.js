@@ -3,7 +3,6 @@ const router = express.Router();
 import { joinGame, getAllGames, deleteAllGames, getAllActiveGames, getAllCompletedGames, getOtherOpenGames,
 getMyActiveGames, getMyOpenGames, getMyCompletedGames, getOtherGames, createGame, getByGameId, makeMove } from "./db/model/game.model.js";
 
-
 // create: functional
 router.post("/", async (req, res) => {
     const username = req.cookies.user;  // retrieve user logged in w/ cookies
