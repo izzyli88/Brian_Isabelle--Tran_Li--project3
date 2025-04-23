@@ -83,12 +83,10 @@ export default function AllGames() {
     return (
       <>
         <NavLink to={"/game/" + gameId} end>
-          {({ isActive }) => (
             <Button
               label={label}
-              className={`button ${isActive ? "currPage" : ""}`}
+              className="button"
             />
-          )}
         </NavLink>
       </>
     );
@@ -164,7 +162,7 @@ export default function AllGames() {
     return games.length === 0 ? <h2> No Active Games</h2> : games;
   }
 
-  // TEST WHEN GAME HAS WON
+  // functional
   function outputMyCompletedGames() {
     const games = [];
     let place = 1;
@@ -216,11 +214,13 @@ export default function AllGames() {
     return games.length === 0 ? <h2> No Games</h2> : games;
   }
 
+  // functional
   async function retrieveActiveGames() {
     const res = await axios.get("/api/game/allActive");
     setActiveGames(res.data);
   }
 
+  // functional
   async function retrieveCompletedGames() {
     const res = await axios.get("/api/game/allCompleted");
     setCompletedGames(res.data);
@@ -269,13 +269,14 @@ export default function AllGames() {
             {new Date(end).toLocaleString()} -- P1: {p1} -- P2: {p2} -- Winner:{" "}
             {winner}
           </h2>
+          {provideLink(id, "Enter")}
         </div>
       );
     }
     return games.length === 0 ? <h2> No Completed Games</h2> : games;
   }
 
-  // remaining: myCompletedGames
+  
   function loggedGamesPage() {
     return (
       <>

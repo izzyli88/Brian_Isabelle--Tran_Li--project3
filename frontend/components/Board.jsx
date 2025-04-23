@@ -3,8 +3,10 @@ import { useGame } from "../context/GameContext.jsx";
 import Square from "./Square";
 import "../styles/styles.css";
 import "../styles/board.css";
+import { useUser } from "../context/UserContext.jsx";
 
 function Board({ isOpponent }) {
+  const user = useUser();
   const {
     yourBoard,
     opponentBoard,
@@ -23,6 +25,14 @@ function Board({ isOpponent }) {
     handleAttack(r, c);
   };
 
+  function maskUnloggedSquares(status) {
+    if (user === undefined && status === "ship") {
+      return "empty"
+    }
+    return status
+
+  }
+
   return (
     <>
       <h1>{boardTitle}</h1>
@@ -31,7 +41,7 @@ function Board({ isOpponent }) {
           row.map((cell, cIdx) => (
             <Square
               key={`${rIdx}-${cIdx}`}
-              status={cell}
+              status={maskUnloggedSquares(cell)}
               isOpponent={isOpponent}
               onHit={() => handleClick(rIdx, cIdx)}
             />
