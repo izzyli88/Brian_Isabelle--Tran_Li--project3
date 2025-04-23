@@ -56,7 +56,7 @@ export async function makeMove(moveSet) {
   if (checkWinner(opponentBoard)) {
     game.status = "Completed";
     game.winner = username;
-    const opponent = (username === p1) ? p2: p1
+    const opponent = (username === game.p1) ? game.p2: game.p1
     await updateWins(username);
     await updateLosses(opponent)
     

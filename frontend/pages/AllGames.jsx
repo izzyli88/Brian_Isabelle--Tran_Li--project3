@@ -106,7 +106,7 @@ export default function AllGames() {
             {place++}. {game.p1}{" "}
           </h2>
           <NavLink to={"/game/" + id} end>
-            <Button label="Join" className="button" onClick={joinGame(id)} />
+            <Button label="Join" className="button" onClick={() =>joinGame(id)} />
           </NavLink>
         </div>
       );
