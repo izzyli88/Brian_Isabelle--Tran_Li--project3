@@ -22,7 +22,7 @@ export function GameProvider({ children }) {
     try {
       const res = await axios.get("/api/game/" + gameId);
       const game = getMaskedGame(res.data, user);
-      return { ...game, fullData: res.data };
+      return { ...game, gameData: res.data };
     } catch (e) {
       console.error("Error fetching game:", e.message);
       return null;
@@ -34,15 +34,15 @@ export function GameProvider({ children }) {
       const game = await retrieveGameData();
       if (!game) return;
 
-      const { yourBoard, opponentBoard, turn, winner, fullData } = game;
+      const { yourBoard, opponentBoard, turn, winner, gameData } = game;
 
       setYourBoard(yourBoard);
       setOpponentBoard(opponentBoard);
       setTurn(turn);
       setWinner(winner);
-      setP1(fullData.p1);
-      setP2(fullData.p2);
-      setOpponentName(fullData.p1 === user ? fullData.p2 : fullData.p1);
+      setP1(gameData.p1);
+      setP2(gameData.p2);
+      setOpponentName(gameData.p1 === user ? gameData.p2 : gameData.p1);
     }
 
     fetchData();
