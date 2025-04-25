@@ -9,7 +9,6 @@ import { useUser } from "../context/UserContext";
 export default function Login() {
   const [username, setUsernameState] = useState("");
   const [password, setPasswordState] = useState("");
-  const [verifyPassword, setVerifyPasswordState] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -23,15 +22,10 @@ export default function Login() {
     setPasswordState(event.target.value);
   }
 
-  function updateVerifyPassword(event) {
-    setVerifyPasswordState(event.target.value);
-  }
-
   async function login() {
     const req = {
       username: username,
       password: password,
-      verifyPassword: verifyPassword,
     };
     try {
       await axios.post("/api/user/login", req);
@@ -55,7 +49,6 @@ export default function Login() {
 
       <EntryField label="Username" onChange={updateUsername} />
       <EntryField label="Password" onChange={updatePassword} />
-      <EntryField label="Re-Enter Password" onChange={updateVerifyPassword} />
       <Button label="Log In" className="button" onClick={login} />
     
        <h2>{message}</h2>

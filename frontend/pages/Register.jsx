@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const [username, setUsernameState] = useState("");
   const [password, setPasswordState] = useState("");
+  const [verifyPassword, setVerifyPasswordState] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   function updateUsername(event) {
@@ -17,14 +19,26 @@ export default function Register() {
     setPasswordState(event.target.value);
   }
 
+  function updateVerifyPassword(event) {
+    setVerifyPasswordState(event.target.value);
+  }
+
   async function register() {
     const req = {
       username: username,
       password: password,
+      verifyPassword: verifyPassword,
     };
-    await axios.post("/api/user/register", req);
-    navigate("/")
-    
+    try {
+      await axios.post("/api/user/register", req);
+      navigate("/")
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setMessage(error.response.data);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    }
   }
 
   return (
@@ -33,7 +47,10 @@ export default function Register() {
 
       <EntryField label="Username" onChange= {updateUsername}/>
       <EntryField label="Password" onChange= {updatePassword} />
+      <EntryField label="Re-Enter Password" onChange={updateVerifyPassword} />
       <Button label="Register" className="button" onClick={register} />
+
+      <h2>{message}</h2>
     </>
   );
 }

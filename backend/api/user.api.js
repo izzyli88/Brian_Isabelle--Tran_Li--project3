@@ -1,21 +1,41 @@
 import express from 'express';
 import { createUser, findUser, getAllUsers, getAllSortedUsers, deleteAllUsers, updateWins, updateLosses } from './db/model/user.model.js';
 const router = express.Router();
+import bcrypt from 'bcryptjs';
 
 router.post('/register', async function(req, res) {
     const requestBody = req.body;
-    const password = requestBody.password;
     const username = requestBody.username;
+    const password = requestBody.password;
+    const verifyPassword = requestBody.verifyPassword
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPassword = await bcrypt.hash(password, salt);
 
-    if(!password || !username) {
+    // missing field
+    if(!password || !username || !verifyPassword) {
         res.status(401);
         res.send("User did not provide a username and/or password")
         return;
     }
 
+    // both input passwords have to match
+    if (password != verifyPassword) {
+        res.status(401);
+        res.send("Passwords should match.")
+        return;
+    }
+
+    const user = await findUser(username);
+
+    if(user) {
+        res.status(400);
+        res.send("The user " + username + " already exists!")
+        return;
+    }
+
     const userdata = {
         username: username,
-        password: password
+        password: encryptedPassword
     }
 
     try {
@@ -24,7 +44,7 @@ router.post('/register', async function(req, res) {
         res.send(response);
     } catch (e) {
         res.status(400)
-        res.send("something went wrong:" + e)
+        res.send("Something went wrong")
     }
 })
 
@@ -33,31 +53,24 @@ router.post('/login', async function(req, res) {
     const requestBody = req.body;
     const password = requestBody.password;
     const username = requestBody.username;
-    const verifyPassword = requestBody.verifyPassword
 
-
-    if(!password || !username || !verifyPassword) {
+    // missing field
+    if(!password || !username) {
         res.status(401);
         res.send("Incomplete information given")
         return;
     }
 
-    if (password != verifyPassword) {
-        res.status(401);
-        res.send("Passwords should match.")
-        return;
-    }
-
     try {
-        const response = await findUser(username);
+        const user = await findUser(username);
 
-        if(!response) {
+        if(!user) {
             res.status(400);
             res.send("User data not found for username: " + username)
             return;
         }
 
-        if(password !== response.password) {
+        if(!await bcrypt.compare(password, user.password)) {
             res.status(401);
             res.send("Username/password pair not valid")
             return;
@@ -67,7 +80,7 @@ router.post('/login', async function(req, res) {
         res.send("Successfully logged in");
     } catch (e) {
         res.status(400)
-        res.send("something went wrong:" + e)
+        res.send("Something went wrong")
 
     }
 })
@@ -81,7 +94,6 @@ router.get('/isLoggedIn', async function(req, res) {
 })
 
 router.delete('/logout', async function(req, res) {
-    // const username = req.cookies.user;
 
     res.clearCookie('user');
 
