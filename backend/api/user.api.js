@@ -81,9 +81,9 @@ router.get('/isLoggedIn', async function(req, res) {
 })
 
 router.delete('/logout', async function(req, res) {
-    const username = req.cookies.user;
+    // const username = req.cookies.user;
 
-    res.cookie('user', username)
+    res.clearCookie('user');
 
     res.send("Successfully logged out")
 })

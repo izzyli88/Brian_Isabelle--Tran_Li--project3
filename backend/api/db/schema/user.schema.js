@@ -18,4 +18,4 @@ export const UserSchema = new Schema({
         type: Number,
         default: 0
     }
-}, { collection: "users"})
+}, { collection: "users" })
