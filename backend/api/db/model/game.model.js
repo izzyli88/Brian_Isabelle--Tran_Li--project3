@@ -93,7 +93,7 @@ export async function getMyOpenGames(username) {
   return GameModel.find({
     status: "Open",
     p1: username,
-    p2: ""
+    p2: "Player 2"
   });
 }
 

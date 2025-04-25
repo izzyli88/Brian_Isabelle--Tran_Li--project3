@@ -6,19 +6,36 @@ import "../styles/board.css";
 import { useUser } from "../context/UserContext.jsx";
 
 function Board({ isOpponent }) {
-  const user = useUser();
+  const { user } = useUser();
   const {
     yourBoard,
     opponentBoard,
     handleAttack,
     winner,
     isYourTurn,
-    opponentName
+    opponentName,
+    p1,
+    p2
   } = useGame();
 
   const board = isOpponent ? opponentBoard : yourBoard;
-  const boardTitle = isOpponent ? `${opponentName}'s Board` : "Your Board";
-  const boardClass = isOpponent ? "board" : "board notClickable";
+
+  let boardTitle;
+  if (isOpponent) {
+    boardTitle = `${opponentName}'s Board`;
+  } else {
+    if (user !== undefined) {
+      boardTitle = "Your Board";
+    } else {
+      const owner = opponentName === p1 ? p2 : p1;
+      boardTitle = `${owner}'s Board`;
+    }
+  }
+
+  let boardClass = isOpponent ? "board" : "board notClickable";
+  if (user === undefined) {
+    boardClass = "board notClickable";
+  }
 
   const handleClick = (r, c) => {
     if (!isOpponent || winner || !isYourTurn) return;
@@ -27,10 +44,9 @@ function Board({ isOpponent }) {
 
   function maskUnloggedSquares(status) {
     if (user === undefined && status === "ship") {
-      return "empty"
+      return "empty";
     }
-    return status
-
+    return status;
   }
 
   return (

@@ -36,7 +36,7 @@ export default function AllGames() {
     },
     [user]
   );
-  
+
   // functional
   async function joinGame(gameId) {
     try {
@@ -58,7 +58,7 @@ export default function AllGames() {
 
   async function retrieveMyOpenGames() {
     // open games curr user part of
-    const res = await axios.get("/api/game/MyOpenGames/" + user);
+    const res = await axios.get("/api/game/myOpenGames/" + user);
     setMyOpenGames(res.data);
   }
 
@@ -83,10 +83,7 @@ export default function AllGames() {
     return (
       <>
         <NavLink to={"/game/" + gameId} end>
-            <Button
-              label={label}
-              className="button"
-            />
+          <Button label={label} className="button" />
         </NavLink>
       </>
     );
@@ -106,7 +103,11 @@ export default function AllGames() {
             {place++}. {game.p1}{" "}
           </h2>
           <NavLink to={"/game/" + id} end>
-            <Button label="Join" className="button" onClick={() =>joinGame(id)} />
+            <Button
+              label="Join"
+              className="button"
+              onClick={() => joinGame(id)}
+            />
           </NavLink>
         </div>
       );
@@ -171,8 +172,8 @@ export default function AllGames() {
       const id = game._id;
       const opponent = user === game.p1 ? game.p2 : game.p1;
       const message = game.winner === user ? "Won" : "Lost";
-      const start = game.start
-      const end = game.end
+      const start = game.start;
+      const end = game.end;
 
       games.push(
         <div key={id}>
@@ -244,6 +245,7 @@ export default function AllGames() {
             {place++}. Start: {new Date(start).toLocaleString()} -- P1: {p1} --
             P2: {p2}
           </h2>
+          {provideLink(id, "Enter")}
         </div>
       );
     }
@@ -276,7 +278,6 @@ export default function AllGames() {
     return games.length === 0 ? <h2> No Completed Games</h2> : games;
   }
 
-  
   function loggedGamesPage() {
     return (
       <>

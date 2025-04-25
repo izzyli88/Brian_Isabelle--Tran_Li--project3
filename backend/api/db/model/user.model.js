@@ -22,7 +22,7 @@ export function getAllUsers() {
 
 
 export function getAllSortedUsers(){
-    return userModel.find().sort({ win: -1, loss: 1, username: 1 }).exec();
+    return userModel.find().sort({ wins: -1, losses: 1, username: 1 }).exec();
 }
 
 export async function updateWins(username) {
