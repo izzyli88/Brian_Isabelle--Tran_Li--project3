@@ -62,6 +62,24 @@ function Navbar() {
     }
   }
 
+  function newGame() {
+    if (user !== undefined) {
+      return (
+        <>
+          <NavLink to="/game">
+            {({ isActive }) => (
+              <Button
+                label="New Game"
+                className="button"
+                onClick={createGame}
+              />
+            )}
+          </NavLink>{" "}
+        </>
+      );
+    }
+  }
+
   return (
     <nav className="navBar">
       <NavLink to="/" end>
@@ -72,14 +90,8 @@ function Navbar() {
           />
         )}
       </NavLink>
-          <NavLink to="/game">
-          {({ isActive }) => (
-            <Button
-            label="New Game"
-            className="button" onClick={createGame}
-            />
-          )}
-          </NavLink>        
+
+      {newGame()}
 
       <NavLink to="/rules">
         {({ isActive }) => (

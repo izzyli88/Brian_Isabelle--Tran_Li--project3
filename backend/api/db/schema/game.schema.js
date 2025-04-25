@@ -7,7 +7,7 @@ export const GameSchema = new Schema({
   },
   p2: {
     type: String,    // username
-    default: ""
+    default: "Player 2"
 
   },
   p1Board: {
