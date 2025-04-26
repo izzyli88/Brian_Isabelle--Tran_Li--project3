@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AllGames from "./pages/AllGames";
 import Navbar from "./components/NavBar";
+import ResetPassword from "./pages/ResetPassword";
 import { UserProvider } from "./context/UserContext";
 
 import "./styles/styles.css";
@@ -78,6 +79,15 @@ const router = createBrowserRouter([
       </>
     ),
   },
+  {
+    path: "/reset",
+    element: (
+      <>
+        <Navbar />
+        <ResetPassword />
+      </>
+    )
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

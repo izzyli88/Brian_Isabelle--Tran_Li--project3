@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 
-export default function Login() {
+export default function ResetPassword() {
   const [username, setUsernameState] = useState("");
   const [password, setPasswordState] = useState("");
+  const [newPassword, setNewPasswordState] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -22,16 +23,22 @@ export default function Login() {
     setPasswordState(event.target.value);
   }
 
-  async function login() {
+  function updateNewPassword(event) {
+    setNewPasswordState(event.target.value);
+  }
+
+  async function reset() {
     const req = {
       username: username,
       password: password,
+      newPassword: newPassword,
     };
     try {
-      await axios.post("/api/user/login", req);
+      await axios.post("/api/user/reset", req);
       await userData.retrieveUserData();
       navigate("/");
 
+      
     } catch (error) {
         console.log(error)
       if (error.response && error.response.data) {
@@ -42,18 +49,14 @@ export default function Login() {
     }
   }
 
-  async function navigateToReset() {
-    navigate("/reset");
-  }
-
   return (
     <>
-      <h1>User Login</h1>
+      <h1>Reset Password</h1>
 
       <EntryField label="Username" onChange={updateUsername} />
       <EntryField label="Password" onChange={updatePassword} />
-      <Button label="Log In" className="button" onClick={login} />
-      <Button label="Forgot Password" className="button" onClick={navigateToReset} />
+      <EntryField label="New Password" onChange={updateNewPassword} />
+      <Button label="Reset Password" className="button" onClick={reset} />
     
        <h2>{message}</h2>
       

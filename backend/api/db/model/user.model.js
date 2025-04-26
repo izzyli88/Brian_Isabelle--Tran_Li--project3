@@ -40,6 +40,11 @@ export async function updateLosses(username) {
     return user;
 }
 
+export async function updatePassword(username, newPassword) {
+    const user = await userModel.findOneAndUpdate({username: username}, {password: newPassword},)
+    return user;
+}
+
 export function deleteAllUsers(){
     userModel.deleteMany().exec();
 }
