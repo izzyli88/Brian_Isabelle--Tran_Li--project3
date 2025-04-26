@@ -126,6 +126,8 @@ router.post('/reset', async function (req, res) {
             return;
         }
 
+        await updatePassword(username, encryptedPassword); 
+
         res.cookie("user", username);
         res.send("Successfully changed password");
 
